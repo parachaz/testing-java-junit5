@@ -15,14 +15,14 @@ IndexController controller;
 
     @Test
     void index() {
-        assertEquals("index",controller.index());
-        assertEquals("index1",controller.index(),()->"Wrong view returned");
+        assertEquals("index",controller.index(),()->"Wrong view returned");
     }
 
     @Test
     @DisplayName("Test exception")
-    void oupsHandler() {
-        assertTrue("abc".equals(controller.oupsHandler()),()->"This is a very" +
-                " expensive message to build");
+    void oopsHandler() {
+        assertThrows(ValueNotFoundException.class, ()->{
+           controller.oopsHandler();
+        },"None or wrong exception was thrown");
     }
 }
