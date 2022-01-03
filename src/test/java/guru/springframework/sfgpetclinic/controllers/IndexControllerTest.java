@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class IndexControllerTest {
 IndexController controller;
@@ -31,7 +32,7 @@ IndexController controller;
     @Test
     void testTimeout() {
         assertTimeout(Duration.ofMillis(100),()->
-            Thread.sleep(2000),"Method timed out"
+            Thread.sleep(50),"Method timed out"
         );
     }
 
@@ -41,5 +42,15 @@ IndexController controller;
         assertTimeoutPreemptively(Duration.ofMillis(1000),()->
             Thread.sleep(900),"Method killed."
         );
+    }
+
+    @Test
+    void testAssumptionTrueWhenNotTrue() {
+        assumeTrue("PARACHA".equals(System.getenv("SYSTEM_NAME")));
+    }
+
+    @Test
+    void testAssumptionTrueWithTrueAssumption() {
+        assumeTrue("PARACHA".equalsIgnoreCase("paracha"));
     }
 }
