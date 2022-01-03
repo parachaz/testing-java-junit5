@@ -3,6 +3,7 @@ package guru.springframework.sfgpetclinic.controllers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.*;
 
 import java.time.Duration;
 
@@ -53,4 +54,29 @@ IndexController controller;
     void testAssumptionTrueWithTrueAssumption() {
         assumeTrue("PARACHA".equalsIgnoreCase("paracha"));
     }
+
+    @EnabledOnOs(OS.MAC)
+    @Test
+    void testOnMac() {
+    }
+    @EnabledOnOs(OS.WINDOWS)
+    @Test
+    void testOnWindows() {
+    }
+
+    @Test
+    @EnabledIfEnvironmentVariable(named="USER",matches = "ZP")
+    void testIfUserIsZaheer() {
+    }
+
+    @Test
+    @EnabledOnJre(JRE.JAVA_11)
+    void testIfJRE11() {
+
+    }
+    @Test
+    @EnabledOnJre(JRE.JAVA_8)
+    void testIfJRE18() {
+    }
+
 }
